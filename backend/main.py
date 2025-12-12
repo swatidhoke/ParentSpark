@@ -5,9 +5,7 @@ from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
 from typing import List, Optional
 from auth import router as auth_router  # your auth routes
-from openai import OpenAI
 #client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
-
 # ----------------------
 # Directories
 # ----------------------
@@ -58,7 +56,7 @@ def comingup():
 
 @app.get("/")
 def read_root():
-    return FileResponse(os.path.join(FRONTEND_DIR, "index.html"))
+    return FileResponse(os.path.join(FRONTEND_DIR, "home.html"))
 
 # GET → Read all users
 @app.get("/all_users")
