@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ParentSpark — Login</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <script src="/static/script.js" defer></script>
+    <style>
+        /* Body & Fonts */
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(to bottom, #ffe6eb, #ffffff);
+            color: #333333;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        /* Main container */
+        main {
+            max-width: 480px;
+            width: 100%;
+            background-color: #ffffff;
+            border-radius: 20px;
+            box-shadow: 0 8px 25px rgba(255, 51, 102, 0.2);
+            padding: 32px 24px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #e60039;
+            margin-bottom: 24px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            margin-bottom: 6px;
+            font-weight: 600;
+            color: #ff3366;
+        }
+
+        input[type="email"],
+        input[type="password"] {
+            padding: 12px;
+            border-radius: 12px;
+            border: 1px solid #ffc0cb;
+            font-size: 16px;
+            margin-bottom: 16px;
+            transition: border 0.3s, box-shadow 0.3s;
+        }
+
+        input[type="email"]:focus,
+        input[type="password"]:focus {
+            border-color: #e60039;
+            box-shadow: 0 0 8px rgba(255, 51, 102, 0.3);
+            outline: none;
+        }
+
+        button[type="submit"] {
+            background: linear-gradient(90deg, #ff3366, #e60039);
+            color: #ffffff;
+            font-weight: 600;
+            padding: 14px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background 0.3s, transform 0.2s;
+            margin-top: 8px;
+        }
+
+        button[type="submit"]:hover {
+            background: linear-gradient(90deg, #ff6699, #ff3366);
+            transform: translateY(-2px);
+        }
+
+        p {
+            text-align: center;
+            font-size: 0.9rem;
+            color: #666666;
+            margin: 10px 0 0 0;
+        }
+
+        a {
+            color: #ff3366;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        #loginMsg {
+            margin-top: 12px;
+            text-align: center;
+            color: #e60039;
+            /* error messages */
+            font-weight: 600;
+        }
+
+        @media (max-width: 500px) {
+            main {
+                margin: 20px;
+                padding: 24px 16px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <main>
+        <h1>Welcome Back to ParentSpark</h1>
+        <form id="loginForm" action="/login" method="POST">
+            <label for="email">Email</label>
+            <input type="email" name="email" id="email" placeholder="Enter your email" required aria-required="true">
+
+            <label for="password">Password</label>
+            <input type="password" name="password" id="password" placeholder="Enter your password" required
+                aria-required="true">
+
+            <button type="submit">Sign In</button>
+
+            <p>Not a member? <a href="/register.html">Join now</a></p>
+            <p><a href="/comingup.html">Forgot email?</a> | <a href="https://stir.com/forgotpassword">Forgot
+                    password?</a></p>
+        </form>
+
+        <p id="loginMsg" aria-live="polite"></p>
+    </main>
+</body>
+
+</html>

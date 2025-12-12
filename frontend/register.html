@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description"
+        content="Sign up for ParentSpark — the community for single parents to meet and connect." />
+    <title>Register — ParentSpark</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Body & Fonts */
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(to bottom, #ffe6eb, #ffffff);
+            color: #333333;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Main container */
+        main {
+            max-width: 480px;
+            margin: 40px auto;
+            padding: 24px;
+            background-color: #ffffff;
+            border-radius: 20px;
+            box-shadow: 0 8px 25px rgba(255, 51, 102, 0.2);
+        }
+
+        h2 {
+            color: #e60039;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        /* Form */
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            font-weight: 600;
+            margin-top: 12px;
+            margin-bottom: 4px;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="password"] {
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 12px;
+            font-size: 16px;
+            margin-bottom: 10px;
+            transition: border 0.3s, box-shadow 0.3s;
+        }
+
+        input[type="text"]:focus,
+        input[type="email"]:focus,
+        input[type="password"]:focus {
+            border-color: #ff3366;
+            box-shadow: 0 0 8px rgba(255, 51, 102, 0.3);
+            outline: none;
+        }
+
+        button[type="submit"] {
+            background: linear-gradient(90deg, #ff3366, #e60039);
+            color: #ffffff;
+            font-weight: 600;
+            padding: 14px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 16px;
+            transition: background 0.3s, transform 0.2s;
+        }
+
+        button[type="submit"]:hover {
+            background: linear-gradient(90deg, #ff6699, #ff3366);
+            transform: translateY(-2px);
+        }
+
+        /* Helper text */
+        #register-help {
+            color: #666666;
+            font-size: 0.9rem;
+            margin-top: 12px;
+            text-align: center;
+        }
+
+        /* Message output */
+        #message {
+            margin-top: 12px;
+            text-align: center;
+            font-weight: 600;
+            color: #e60039;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 500px) {
+            main {
+                margin: 20px;
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <main>
+        <h2>Create your ParentSpark account</h2>
+
+        <form action="/register_user" method="post" id="registerForm" aria-describedby="register-help">
+            <label for="username">Username</label>
+            <input type="text" placeholder="Username" name="username" required aria-required="true">
+
+            <label for="email">Email</label>
+            <input type="email" placeholder="Email" name="email" required aria-required="true">
+
+            <label for="password">Password</label>
+            <input type="password" placeholder="Password" name="password" required aria-required="true">
+
+            <button type="submit">Register</button>
+        </form>
+
+        <p id="register-help">By registering you agree to ParentSpark's terms.</p>
+        <p id="message" aria-live="polite"></p>
+    </main>
+
+    <script src="/static/script.js"></script>
+</body>
+
+</html>

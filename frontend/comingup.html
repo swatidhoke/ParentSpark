@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ParentSpark — Account Recovery</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <script src="/static/script.js" defer></script>
+    <style>
+        /* Body & Fonts */
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(to bottom, #ffe6eb, #ffffff);
+            color: #333333;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        /* Main container */
+        main {
+            max-width: 480px;
+            width: 100%;
+            background-color: #ffffff;
+            border-radius: 20px;
+            box-shadow: 0 8px 25px rgba(255, 51, 102, 0.2);
+            padding: 32px 24px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #e60039;
+            margin-bottom: 16px;
+        }
+
+        p.instructions {
+            text-align: center;
+            color: #666666;
+            font-size: 0.95rem;
+            margin-bottom: 24px;
+        }
+
+        /* Tabs */
+        .tabs {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 24px;
+        }
+
+        .tab {
+            padding: 10px 20px;
+            margin: 0 5px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: 0.3s;
+            color: #ff3366;
+            border: 1px solid #ff3366;
+        }
+
+        .tab.active {
+            background: linear-gradient(90deg, #ff3366, #e60039);
+            color: #fff;
+            border: none;
+        }
+
+        /* Forms */
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            margin-bottom: 6px;
+            font-weight: 600;
+            color: #ff3366;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="password"] {
+            padding: 12px;
+            border-radius: 12px;
+            border: 1px solid #ffc0cb;
+            font-size: 16px;
+            margin-bottom: 16px;
+            transition: border 0.3s, box-shadow 0.3s;
+        }
+
+        input:focus {
+            border-color: #e60039;
+            box-shadow: 0 0 8px rgba(255, 51, 102, 0.3);
+            outline: none;
+        }
+
+        button[type="submit"] {
+            background: linear-gradient(90deg, #ff3366, #e60039);
+            color: #ffffff;
+            font-weight: 600;
+            padding: 14px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background 0.3s, transform 0.2s;
+            margin-top: 8px;
+        }
+
+        button[type="submit"]:hover {
+            background: linear-gradient(90deg, #ff6699, #ff3366);
+            transform: translateY(-2px);
+        }
+
+        #recoveryMsg {
+            margin-top: 12px;
+            text-align: center;
+            color: #e60039;
+            font-weight: 600;
+        }
+
+        p {
+            text-align: center;
+            font-size: 0.9rem;
+            color: #666666;
+            margin: 10px 0 0 0;
+        }
+
+        a {
+            color: #ff3366;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 500px) {
+            main {
+                margin: 20px;
+                padding: 24px 16px;
+            }
+
+            .tabs {
+                flex-direction: column;
+            }
+
+            .tab {
+                margin: 5px 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <main>
+        <h1>Account Recovery</h1>
+        <p class="instructions">Recover your ParentSpark account: recover your email or reset your password.</p>
+
+        <!-- Tabs -->
+        <div class="tabs">
+            <div class="tab active" id="emailTab">Forgot Email</div>
+            <div class="tab" id="passwordTab">Forgot Password</div>
+        </div>
+
+        <!-- Forms -->
+        <form id="forgotEmailForm">
+            <label for="usernameOrPhone">Username or Phone Number</label>
+            <input type="text" name="usernameOrPhone" id="usernameOrPhone" placeholder="Enter username or phone"
+                required aria-required="true">
+            <button type="submit">Recover Email</button>
+        </form>
+
+        <form id="forgotPasswordForm" style="display:none;">
+            <label for="emailForPassword">Registered Email</label>
+            <input type="email" name="emailForPassword" id="emailForPassword" placeholder="Enter your email" required
+                aria-required="true">
+            <button type="submit">Reset Password</button>
+        </form>
+
+        <p id="recoveryMsg" aria-live="polite"></p>
+        <p><a href="/login.html">Back to Login</a></p>
+    </main>
+
+    <script>
+        // Tab switching
+        const emailTab = document.getElementById('emailTab');
+        const passwordTab = document.getElementById('passwordTab');
+        const forgotEmailForm = document.getElementById('forgotEmailForm');
+        const forgotPasswordForm = document.getElementById('forgotPasswordForm');
+
+        emailTab.addEventListener('click', () => {
+            emailTab.classList.add('active');
+            passwordTab.classList.remove('active');
+            forgotEmailForm.style.display = 'flex';
+            forgotPasswordForm.style.display = 'none';
+        });
+
+        passwordTab.addEventListener('click', () => {
+            passwordTab.classList.add('active');
+            emailTab.classList.remove('active');
+            forgotPasswordForm.style.display = 'flex';
+            forgotEmailForm.style.display = 'none';
+        });
+    </script>
+</body>
+
+</html>
