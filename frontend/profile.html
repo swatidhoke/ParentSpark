@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>User Profile | ParentSpark</title>
+    <link rel="stylesheet" href="/static/style.css">
+
+    <style>
+        :root {
+            --brand: #e60039;
+            --soft-pink: #ffe6eb;
+            --text-muted: #999;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to bottom, var(--soft-pink), #ffffff);
+            margin: 0;
+            padding: 0;
+        }
+
+        .profile-container {
+            max-width: 900px;
+            margin: 40px auto;
+            background: white;
+            padding: 30px;
+            border-radius: 14px;
+            box-shadow: 0 8px 20px rgba(230, 0, 57, 0.15);
+        }
+
+        .header {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .avatar {
+            width: 140px;
+            height: 140px;
+            border-radius: 50%;
+            border: 4px solid var(--soft-pink);
+            object-fit: cover;
+        }
+
+        h1 {
+            margin: 0;
+            color: var(--brand);
+        }
+
+        .section {
+            margin-top: 30px;
+        }
+
+        .section h2 {
+            color: var(--brand);
+            border-bottom: 2px solid var(--soft-pink);
+            padding-bottom: 6px;
+            margin-bottom: 12px;
+        }
+
+        .field {
+            margin: 8px 0;
+        }
+
+        .placeholder {
+            color: var(--text-muted);
+            font-style: italic;
+        }
+
+        .logout {
+            margin-top: 30px;
+            text-align: right;
+        }
+
+        .logout a {
+            color: var(--brand);
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+        .logout a:hover {
+            text-decoration: underline;
+        }
+
+        .back-link {
+            margin-top: 15px;
+            display: inline-block;
+            color: var(--brand);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="profile-container">
+
+        <!-- HEADER -->
+        <div class="header">
+            <img src="/static/avatar_placeholder.png" class="avatar" alt="Profile Photo">
+            <div>
+                <h1 id="username">Welcome 👋</h1>
+                <div class="field">
+                    <strong>Email:</strong>
+                    <span id="email" class="placeholder">Not provided</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- ABOUT -->
+        <div class="section">
+            <h2>About Me</h2>
+            <p class="placeholder">
+                Tell others about yourself. Share your story, your journey, and what you’re looking for.
+            </p>
+        </div>
+
+        <!-- BASIC INFO -->
+        <div class="section">
+            <h2>Basic Info</h2>
+            <div class="field"><strong>Age:</strong> <span class="placeholder">Not specified</span></div>
+            <div class="field"><strong>Location:</strong> <span class="placeholder">Not specified</span></div>
+            <div class="field"><strong>Gender:</strong> <span class="placeholder">Not specified</span></div>
+            <div class="field"><strong>Looking for:</strong> <span class="placeholder">Not specified</span></div>
+        </div>
+
+        <!-- LIFESTYLE -->
+        <div class="section">
+            <h2>Lifestyle</h2>
+            <div class="field"><strong>Kids:</strong> <span class="placeholder">Not specified</span></div>
+            <div class="field"><strong>Smoking:</strong> <span class="placeholder">Not specified</span></div>
+            <div class="field"><strong>Drinking:</strong> <span class="placeholder">Not specified</span></div>
+            <div class="field"><strong>Religion:</strong> <span class="placeholder">Not specified</span></div>
+        </div>
+
+        <!-- INTERESTS -->
+        <div class="section">
+            <h2>Interests</h2>
+            <p class="placeholder">
+                Add hobbies, passions, and things you enjoy doing.
+            </p>
+        </div>
+
+        <!-- NAV -->
+        <a href="/home.html" class="back-link">← Back to Profiles</a>
+
+        <!-- LOGOUT -->
+        <div class="logout">
+            <a href="/login.html">Logout</a>
+        </div>
+
+    </div>
+
+    <script>
+        // Read ?user=email from URL
+        const params = new URLSearchParams(window.location.search);
+        const email = params.get("user");
+
+        if (allow := email) {
+            document.getElementById("email").textContent = email;
+            document.getElementById("email").classList.remove("placeholder");
+
+            document.getElementById("username").textContent =
+                "Welcome, " + email.split("@")[0];
+        }
+    </script>
+
+</body>
+
+</html>

@@ -4,23 +4,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dating Website</title>
+    <title>ParentSpark — Meaningful Connections for Single Parents</title>
+
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+
     <style>
-        /* Body & Fonts */
         body {
-            background: linear-gradient(to bottom, #ffe6eb, #ffffff);
-            /* soft pink gradient */
-            color: #333333;
             font-family: 'Inter', sans-serif;
             margin: 0;
+            color: #333;
+            background: linear-gradient(to bottom, #ffe6eb, #ffffff);
         }
 
-        /* Navbar */
+        /* NAVBAR */
         .navbar {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
             background-color: #e60039;
-            /* deep pink/red */
-            color: #ffffff;
+            color: #fff;
             padding: 15px 30px;
             display: flex;
             justify-content: space-between;
@@ -28,160 +30,243 @@
         }
 
         .navbar a {
-            color: #ffffff;
+            color: white;
             margin-left: 20px;
             text-decoration: none;
             font-weight: 600;
         }
 
         .navbar a:hover {
-            color: #ff99aa;
+            color: #ffb3c1;
         }
 
-        /* Hero Section */
+        .login-btn {
+            background: white;
+            color: #e60039 !important;
+            padding: 8px 16px;
+            border-radius: 20px;
+        }
+
+        /* HERO */
         .hero {
             text-align: center;
-            padding: 80px 20px;
+            padding: 90px 20px;
         }
 
         .hero h1 {
+            font-size: 46px;
             color: #e60039;
-            font-size: 48px;
             margin-bottom: 20px;
         }
 
         .hero p {
-            color: #ff3366;
             font-size: 20px;
+            color: #ff3366;
+            max-width: 600px;
+            margin: auto;
             margin-bottom: 30px;
+        }
+
+        .cta-group {
+            margin-top: 30px;
         }
 
         .btn-primary {
             background: linear-gradient(90deg, #ff3366, #e60039);
-            color: #ffffff;
-            border: none;
-            padding: 15px 30px;
-            font-size: 18px;
+            color: white;
+            padding: 15px 32px;
             border-radius: 30px;
-            cursor: pointer;
-            transition: 0.3s;
+            text-decoration: none;
+            font-size: 18px;
+            font-weight: 600;
+            margin-right: 15px;
+            display: inline-block;
         }
 
-        .btn-primary:hover {
-            background: linear-gradient(90deg, #ff6699, #ff3366);
+        .btn-secondary {
+            background: transparent;
+            color: #e60039;
+            border: 2px solid #e60039;
+            padding: 13px 28px;
+            border-radius: 30px;
+            font-weight: 600;
+            text-decoration: none;
         }
 
-        /* Profile Cards */
+        /* PROFILES */
         .profiles {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-            padding: 40px 30px;
+            gap: 24px;
+            padding: 50px 30px;
         }
 
         .profile-card {
-            background-color: #ffffff;
+            text-decoration: none;
+            color: inherit;
+            background: white;
             border-radius: 20px;
-            box-shadow: 0 8px 20px rgba(255, 51, 102, 0.2);
             padding: 20px;
             text-align: center;
+            box-shadow: 0 8px 20px rgba(255, 51, 102, 0.2);
             transition: transform 0.3s, box-shadow 0.3s;
         }
 
         .profile-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 12px 25px rgba(255, 51, 102, 0.3);
+            transform: translateY(-6px);
+            box-shadow: 0 14px 30px rgba(255, 51, 102, 0.3);
         }
 
         .profile-card img {
             width: 100px;
             height: 100px;
             border-radius: 50%;
-            margin-bottom: 15px;
             object-fit: cover;
+            margin-bottom: 12px;
+        }
+
+        .badge {
+            background: #ffe6eb;
+            color: #e60039;
+            font-size: 12px;
+            padding: 4px 10px;
+            border-radius: 12px;
+            display: inline-block;
+            margin-bottom: 8px;
         }
 
         .profile-card h3 {
             color: #e60039;
-            margin-bottom: 10px;
+            margin: 8px 0;
         }
 
         .profile-card p {
             color: #ff3366;
             font-size: 14px;
-            margin-bottom: 15px;
         }
 
-        .profile-card .btn-message {
-            background-color: #ff3366;
-            color: #fff;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 25px;
-            cursor: pointer;
-            transition: 0.3s;
+        .hint {
+            margin-top: 10px;
+            font-size: 12px;
+            color: #999;
         }
 
-        .profile-card .btn-message:hover {
-            background-color: #ff6699;
+        /* TRUST */
+        .trust {
+            background: #fff;
+            padding: 60px 20px;
+            text-align: center;
         }
 
-        /* Footer */
+        .trust h2 {
+            color: #e60039;
+            margin-bottom: 20px;
+        }
+
+        .trust ul {
+            list-style: none;
+            padding: 0;
+            max-width: 500px;
+            margin: auto;
+        }
+
+        .trust li {
+            margin: 10px 0;
+            font-weight: 600;
+        }
+
+        /* FOOTER */
         footer {
-            background-color: #e60039;
-            color: #ffffff;
+            background: #e60039;
+            color: white;
             text-align: center;
             padding: 20px;
             margin-top: 40px;
+        }
+
+        /* ACCESSIBILITY */
+        a:focus {
+            outline: 3px solid #ff99aa;
+            outline-offset: 3px;
         }
     </style>
 </head>
 
 <body>
 
-    <!-- Navbar -->
+    <!-- NAVBAR -->
     <nav class="navbar">
         <div class="logo">❤️ ParentSpark</div>
-        <div class="links">
+        <div>
             <a href="./home.html">Home</a>
             <a href="./login.html">Profiles</a>
             <a href="./login.html">Messages</a>
-            <a href="./login.html">Login</a>
+            <a href="./login.html" class="login-btn">Login</a>
         </div>
     </nav>
 
-    <!-- Hero Section -->
+    <!-- HERO -->
     <section class="hero">
-        <h1>Find Your Perfect Match</h1>
-        <p>Connect, chat, and fall in love with people near you!</p>
-        <a href="/register.html" class="btn-primary">Get Started</a>
+        <h1>Meaningful Connections for Single Parents</h1>
+        <p>Meet genuine people who understand your journey, your priorities, and your family.</p>
+
+        <div class="cta-group">
+            <a href="/register.html" class="btn-primary">Join Free</a>
+            <a href="#profiles" class="btn-secondary">Browse Profiles</a>
+        </div>
     </section>
 
-    <!-- Profiles Section -->
-    <section class="profiles">
-        <div class="profile-card">
-            <img src="https://via.placeholder.com/100" alt="Profile Photo">
-            <h3>Emily, 27</h3>
+    <!-- PROFILES -->
+    <section class="profiles" id="profiles">
+
+        <a class="profile-card"
+            href="profile-detail.html?name=Emily&age=34&bio=Loves%20hiking,%20coffee,%20and%20romantic%20dinners.&img=https://images.unsplash.com/photo-1544005313-94ddf0286df2"
+            aria-label="View Emily's profile">
+            <img loading="lazy"
+                src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=200&q=80">
+            <span class="badge">Single Parent</span>
+            <h3>Emily, 34</h3>
             <p>Loves hiking, coffee, and romantic dinners.</p>
-            <button class="btn-message">Message</button>
-        </div>
-        <div class="profile-card">
-            <img src="https://via.placeholder.com/100" alt="Profile Photo">
-            <h3>James, 30</h3>
-            <p>Traveler, foodie, and dog lover looking for adventure.</p>
-            <button class="btn-message">Message</button>
-        </div>
-        <div class="profile-card">
-            <img src="https://via.placeholder.com/100" alt="Profile Photo">
-            <h3>Sophia, 25</h3>
-            <p>Yoga enthusiast and bookworm searching for meaningful connections.</p>
-            <button class="btn-message">Message</button>
-        </div>
+            <div class="hint">View profile →</div>
+        </a>
+
+        <a class="profile-card"
+            href="profile-detail.html?name=James&age=33&bio=Traveler,%20foodie,%20and%20dog%20lover.&img=https://images.unsplash.com/photo-1506794778202-cad84cf45f1d"
+            aria-label="View James's profile">
+            <img loading="lazy"
+                src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=200&q=80">
+            <span class="badge">Single Parent</span>
+            <h3>James, 33</h3>
+            <p>Traveler, foodie, and dog lover.</p>
+            <div class="hint">View profile →</div>
+        </a>
+
+        <a class="profile-card"
+            href="profile-detail.html?name=Sophia&age=41&bio=Yoga%20enthusiast%20and%20bookworm.&img=https://images.unsplash.com/photo-1524504388940-b1c1722653e1"
+            aria-label="View Sophia's profile">
+            <img loading="lazy"
+                src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=200&q=80">
+            <span class="badge">Single Parent</span>
+            <h3>Sophia, 41</h3>
+            <p>Yoga enthusiast and bookworm.</p>
+            <div class="hint">View profile →</div>
+        </a>
+
     </section>
 
-    <!-- Footer -->
+    <!-- TRUST -->
+    <section class="trust">
+        <h2>Why Parents Love ParentSpark</h2>
+        <ul>
+            <li>✔ Designed exclusively for single parents</li>
+            <li>✔ Safe, respectful & verified community</li>
+            <li>✔ Real profiles & meaningful matches</li>
+        </ul>
+    </section>
+
+    <!-- FOOTER -->
     <footer>
-        &copy; 2025 LoveConnect. All rights reserved.
+        © 2025 ParentSpark · Privacy · Terms · Safety
     </footer>
 
 </body>

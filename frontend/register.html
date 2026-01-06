@@ -18,9 +18,8 @@
             padding: 0;
         }
 
-        /* Main container */
         main {
-            max-width: 480px;
+            max-width: 500px;
             margin: 40px auto;
             padding: 24px;
             background-color: #ffffff;
@@ -34,7 +33,6 @@
             margin-bottom: 20px;
         }
 
-        /* Form */
         form {
             display: flex;
             flex-direction: column;
@@ -48,26 +46,30 @@
 
         input[type="text"],
         input[type="email"],
-        input[type="password"] {
+        input[type="password"],
+        input[type="number"],
+        select,
+        textarea {
             padding: 12px;
             border: 1px solid #ccc;
             border-radius: 12px;
             font-size: 16px;
             margin-bottom: 10px;
             transition: border 0.3s, box-shadow 0.3s;
+            width: 100%;
         }
 
-        input[type="text"]:focus,
-        input[type="email"]:focus,
-        input[type="password"]:focus {
+        input:focus,
+        select:focus,
+        textarea:focus {
             border-color: #ff3366;
             box-shadow: 0 0 8px rgba(255, 51, 102, 0.3);
             outline: none;
         }
 
-        button[type="submit"] {
+        button {
             background: linear-gradient(90deg, #ff3366, #e60039);
-            color: #ffffff;
+            color: #fff;
             font-weight: 600;
             padding: 14px;
             border: none;
@@ -78,20 +80,32 @@
             transition: background 0.3s, transform 0.2s;
         }
 
-        button[type="submit"]:hover {
+        button:hover {
             background: linear-gradient(90deg, #ff6699, #ff3366);
             transform: translateY(-2px);
         }
 
-        /* Helper text */
+        .step {
+            display: none;
+        }
+
+        .step.active {
+            display: block;
+        }
+
+        .navigation-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 10px;
+        }
+
         #register-help {
-            color: #666666;
+            color: #666;
             font-size: 0.9rem;
             margin-top: 12px;
             text-align: center;
         }
 
-        /* Message output */
         #message {
             margin-top: 12px;
             text-align: center;
@@ -99,7 +113,6 @@
             color: #e60039;
         }
 
-        /* Responsive adjustments */
         @media (max-width: 500px) {
             main {
                 margin: 20px;
@@ -113,24 +126,135 @@
     <main>
         <h2>Create your ParentSpark account</h2>
 
-        <form action="/register_user" method="post" id="registerForm" aria-describedby="register-help">
-            <label for="username">Username</label>
-            <input type="text" placeholder="Username" name="username" required aria-required="true">
+        <form id="registerForm" action="/register_user" method="post">
 
-            <label for="email">Email</label>
-            <input type="email" placeholder="Email" name="email" required aria-required="true">
+            <!-- Step 1: Account Info -->
+            <div class="step active" id="step1">
+            
 
-            <label for="password">Password</label>
-            <input type="password" placeholder="Password" name="password" required aria-required="true">
+                <label for="email">Email</label>
+                <input type="email" name="email" placeholder="Email" required>
 
-            <button type="submit">Register</button>
+                <label for="password">Password</label>
+                <input type="password" name="password" placeholder="Password" required>
+
+                <div class="navigation-buttons">
+                    <span></span>
+                    <button type="button" onclick="nextStep()">Next →</button>
+                </div>
+            </div>
+
+            <!-- Step 2: Basic Profile -->
+            <div class="step" id="step2">
+                <label for="age">Age</label>
+                <input type="number" name="age" placeholder="Your age" min="18" required>
+
+                <label for="location">Location</label>
+                <input type="text" name="location" placeholder="City, Country" required>
+
+                <label for="gender">Gender</label>
+                <select name="gender" required>
+                    <option value="">Select</option>
+                    <option>Female</option>
+                    <option>Male</option>
+                    <option>Non-binary</option>
+                </select>
+
+                <label for="looking_for">Looking for</label>
+                <select name="looking_for" required>
+                    <option value="">Select</option>
+                    <option>Men</option>
+                    <option>Women</option>
+                    <option>Everyone</option>
+                </select>
+
+                <div class="navigation-buttons">
+                    <button type="button" onclick="prevStep()">← Back</button>
+                    <button type="button" onclick="nextStep()">Next →</button>
+                </div>
+            </div>
+
+            <!-- Step 3: Lifestyle & Bio -->
+            <div class="step" id="step3">
+                <label for="kids">Kids</label>
+                <select name="kids" required>
+                    <option value="">Select</option>
+                    <option>Yes</option>
+                    <option>No</option>
+                </select>
+
+                <label for="bio">Bio</label>
+                <textarea name="bio" rows="3" placeholder="Tell others about yourself..."></textarea>
+
+                <label for="interests">Interests / Hobbies</label>
+                <input type="text" name="interests" placeholder="e.g. hiking, cooking">
+
+                <div class="navigation-buttons">
+                    <button type="button" onclick="prevStep()">← Back</button>
+                    <button type="submit">Register</button>
+                </div>
+            </div>
+
         </form>
 
         <p id="register-help">By registering you agree to ParentSpark's terms.</p>
         <p id="message" aria-live="polite"></p>
+
+        <p style="text-align:center; margin-top:20px; font-size:0.95rem;">
+            Already a member?
+            <a href="login.html" style="
+                display:inline-block;
+                background: linear-gradient(90deg, #ff3366, #e60039);
+                color: #ffffff;
+                padding: 8px 16px;
+                border-radius: 20px;
+                text-decoration: none;
+                font-weight: 600;
+                transition: background 0.3s;
+            " onmouseover="this.style.background='linear-gradient(90deg, #ff6699, #ff3366)'"
+                onmouseout="this.style.background='linear-gradient(90deg, #ff3366, #e60039)'">
+                Login here
+            </a>
+        </p>
+
     </main>
 
-    <script src="/static/script.js"></script>
+    <script>
+        let currentStep = 1;
+        const totalSteps = 3;
+
+        function showStep(step) {
+            for (let i = 1; i <= totalSteps; i++) {
+                const el = document.getElementById(`step${i}`);
+                if (i === step) el.classList.add("active");
+                else el.classList.remove("active");
+            }
+        }
+
+        function nextStep() {
+            const form = document.getElementById('registerForm');
+            const inputs = document.querySelectorAll(`#step${currentStep} input, #step${currentStep} select, #step${currentStep} textarea`);
+            for (let input of inputs) {
+                if (!input.checkValidity()) {
+                    input.reportValidity();
+                    return;
+                }
+            }
+            if (currentStep < totalSteps) {
+                currentStep++;
+                showStep(currentStep);
+            }
+        }
+
+        function prevStep() {
+            if (currentStep > 1) {
+                currentStep--;
+                showStep(currentStep);
+            }
+        }
+
+        showStep(currentStep);
+    </script>
 </body>
 
 </html>

@@ -1,13 +1,16 @@
-from fastapi import APIRouter, HTTPException
+# auth.py
+from fastapi import APIRouter, HTTPException, Form
 from pydantic import BaseModel, EmailStr
+import sqlite3
 import hashlib
 
 router = APIRouter(prefix="/auth", tags=["Authentication"])
 
-# Temporary in-memory database
-users_db = {}
+DB_FILE = "users.db"  # SQLite database file
 
+# ----------------------
 # Models
+# ----------------------
 class RegisterModel(BaseModel):
     username: str
     email: EmailStr
@@ -17,31 +20,62 @@ class LoginModel(BaseModel):
     email: EmailStr
     password: str
 
-def hash_password(password: str):
+# ----------------------
+# Helper functions
+# ----------------------
+def hash_password(password: str) -> str:
     return hashlib.sha256(password.encode()).hexdigest()
 
-# Register API
+def create_users_table():
+    conn = sqlite3.connect(DB_FILE)
+    c = conn.cursor()
+    c.execute("""
+        CREATE TABLE IF NOT EXISTS users (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            username TEXT NOT NULL,
+            email TEXT UNIQUE NOT NULL,
+            password TEXT NOT NULL
+        )
+    """)
+    conn.commit()
+    conn.close()
+
+create_users_table()  # Ensure table exists
+
+# ----------------------
+# Routes
+# ----------------------
 @router.post("/register")
 def register(user: RegisterModel):
-    if user.email in users_db:
+    conn = sqlite3.connect(DB_FILE)
+    c = conn.cursor()
+    hashed = hash_password(user.password)
+    try:
+        c.execute(
+            "INSERT INTO users (username, email, password) VALUES (?, ?, ?)",
+            (user.username, user.email, hashed)
+        )
+        conn.commit()
+    except sqlite3.IntegrityError:
+        conn.close()
         raise HTTPException(status_code=400, detail="Email already registered")
     
-    users_db[user.email] = {
-        "username": user.username,
-        "password": hash_password(user.password)
-    }
-
+    conn.close()
     return {"message": f"User {user.username} registered successfully!"}
 
-# Login API
 @router.post("/login")
 def login(user: LoginModel):
-    if user.email not in users_db:
+    conn = sqlite3.connect(DB_FILE)
+    c = conn.cursor()
+    c.execute("SELECT username, password FROM users WHERE email=?", (user.email,))
+    row = c.fetchone()
+    conn.close()
+
+    if not row:
         raise HTTPException(status_code=404, detail="User not found")
 
-    hashed = hash_password(user.password)
-
-    if users_db[user.email]["password"] != hashed:
+    username, stored_password = row
+    if stored_password != hash_password(user.password):
         raise HTTPException(status_code=401, detail="Incorrect password")
 
-    return {"message": "Login successful", "username": users_db[user.email]["username"]}
+    return {"message": "Login successful", "username": username}
